@@ -177,7 +177,8 @@ class AuctionResource(APIResource):
 
         """
         auction = self.context
-        if self.request.authenticated_role != 'Administrator' and auction.status in ['complete', 'unsuccessful', 'cancelled']:
+        if self.request.authenticated_role != 'Administrator' and auction.status in ['complete', 'unsuccessful', 'cancelled'] or \
+           self.request.authenticated_role == 'auction_owner' and auction.status == 'active.tendering':
             self.request.errors.add('body', 'data', 'Can\'t update auction in current ({}) status'.format(auction.status))
             self.request.errors.status = 403
             return
