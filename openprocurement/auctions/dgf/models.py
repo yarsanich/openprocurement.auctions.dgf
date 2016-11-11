@@ -217,8 +217,9 @@ class Auction(BaseAuction):
             self.tenderPeriod = type(self).tenderPeriod.model_class()
         now = get_now()
         self.tenderPeriod.startDate = self.enquiryPeriod.startDate = now
-        pause_between_periods = self.auctionPeriod.startDate - (self.auctionPeriod.startDate.replace(hour=20, minute=0, second=0, microsecond=0) - timedelta(days=1))
-        self.enquiryPeriod.endDate = self.tenderPeriod.endDate = calculate_business_date(self.auctionPeriod.startDate, -pause_between_periods, self)
+        delta_time = self.auctionPeriod.startDate.replace(hour=20, minute=0, second=0, microsecond=0) - self.auctionPeriod.startDate
+        endDate = calculate_business_date(calculate_business_date(self.auctionPeriod.startDate, -timedelta(days=1), self, True), delta_time, self)
+        self.enquiryPeriod.endDate = self.tenderPeriod.endDate = endDate
         self.auctionPeriod.startDate = None
         self.auctionPeriod.endDate = None
         self.date = now
