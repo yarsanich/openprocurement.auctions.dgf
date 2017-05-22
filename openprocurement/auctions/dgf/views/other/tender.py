@@ -181,6 +181,20 @@ class AuctionResource(APIResource):
             self.request.errors.add('body', 'data', 'Can\'t update auction in current ({}) status'.format(auction.status))
             self.request.errors.status = 403
             return
+        if self.request.authenticated_role == 'Administrator' and auction.status == 'active.tendering':
+            if auction.value.amount < self.request.validated['data'].get('value').get('amount'):
+                self.request.errors.add('body', 'data', 'Only reducing value is allowed')
+                self.request.errors.status = 403
+            if auction.minimalStep.amount < self.request.validated['data'].get('minimalStep').get('amount'):
+                self.request.errors.add('body', 'data', 'Only reducing minimalStep is allowed')
+                self.request.errors.status = 403
+            if auction.guarantee and auction.guarantee.amount < self.request.validated['data'].get('guarantee').get('amount'):
+                self.request.errors.add('body', 'data', 'Only reducing guarantee is allowed')
+                self.request.errors.status = 403
+            if self.request.errors.status != 403:
+                apply_patch(self.request, src=self.request.validated['auction_src'])
+            else:
+                return
         if self.request.authenticated_role == 'chronograph':
             apply_patch(self.request, save=False, src=self.request.validated['auction_src'])
             check_status(self.request)
