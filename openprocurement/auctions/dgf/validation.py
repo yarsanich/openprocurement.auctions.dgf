@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 from openprocurement.api.utils import error_handler
 
-def validate_change_value_minimalStep_guarantee(request):
+def validate_change_price_criteria_reduction_by_administrator(request):
+    """
+        Validate value, minimalStep, guarantee change
+        Value only decrease for not more that 50%
+        minimalStep, guarantee only decrease
+    """
     if request.authenticated_role == 'Administrator' and request.context.status == 'active.tendering':
         new_value = request.validated['data'].get('value').get('amount')
         new_minimalStep = request.validated['data'].get('minimalStep').get('amount')
