@@ -1210,7 +1210,10 @@ class AuctionResourceTest(BaseWebTest):
 
         for param in ['value', 'minimalStep', 'guarantee']:
             response = self.app.patch_json('/auctions/{}'.format(auction['id']), {'data': { param: {'amount': auction[param]['amount'] + 20 }}}, status=403)
-            self.assertEqual(response.json['errors'],[{"location": "body", "name": "data", "description": "Only reducing {} is allowed".format(param)}])
+            if param != 'value':
+                self.assertEqual(response.json['errors'],[{"location": "body", "name": "data", "description": "Only reducing {} is allowed".format(param)}])
+            else:
+                self.assertEqual(response.json['errors'],[{"location": "body", "name": "data", "description": "Only reducing {} not more than 50% is allowed".format(param)}])
 
         # Try to decrease value and increase minimal Step  with guarantee
 
@@ -1220,6 +1223,11 @@ class AuctionResourceTest(BaseWebTest):
                     'minimalStep': {'amount': auction['minimalStep']['amount'] + 10}}}, status=403)
         self.assertEqual(response.json['errors'], [{'description': 'Only reducing minimalStep is allowed', 'location': 'body', 'name': 'data'},
                           {'description': 'Only reducing guarantee is allowed', 'location': 'body', 'name': 'data'}])
+
+        #  Check decrease value more than 50%
+
+        response = self.app.patch_json('/auctions/{}'.format(auction['id']),{'data': {'value': {'amount': auction['value']['amount'] - 60}}}, status=403)
+        self.assertEqual(response.json['errors'],[{"location": "body", "name": "data", "description": "Only reducing value not more than 50% is allowed"}])
 
 class AuctionProcessTest(BaseAuctionWebTest):
     #setUp = BaseWebTest.setUp
