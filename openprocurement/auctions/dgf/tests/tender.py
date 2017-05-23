@@ -1182,8 +1182,6 @@ class AuctionResourceTest(BaseWebTest):
         self.assertEqual(response.content_type, 'application/json')
         self.assertEqual(response.json['data']['mode'], u'test')
 
-        #import pdb; pdb.set_trace();
-
         self.app.authorization = authorization
 
         auction_data = deepcopy(self.initial_data)
