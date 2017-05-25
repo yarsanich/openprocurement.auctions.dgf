@@ -12,7 +12,7 @@ Host: api-sandbox.ea.openprocurement.org
       "amount": 35
     }, 
     "auctionPeriod": {
-      "startDate": "2016-12-16"
+      "startDate": "2017-06-08"
     }, 
     "tenderAttempts": 1, 
     "procurementMethodType": "dgfFinancialAssets", 
@@ -27,8 +27,8 @@ Host: api-sandbox.ea.openprocurement.org
     "items": [
       {
         "classification": {
-          "scheme": "CAV", 
-          "id": "06000000-2", 
+          "scheme": "CPV", 
+          "id": "66113000-5", 
           "description": "Земельні ділянки"
         }, 
         "quantity": 5, 
@@ -71,55 +71,55 @@ Host: api-sandbox.ea.openprocurement.org
 
 201 Created
 Content-Type: application/json; charset=UTF-8
-Location: http://api-sandbox.ea.openprocurement.org/api/2.3/auctions/bfddd8a61d1d49d19156b1e40ccb6e82
+Location: http://api-sandbox.ea.openprocurement.org/api/2.3/auctions/b4642b238000446da633ee7ddceaf888
 
 {
   "access": {
-    "token": "43aa4293fcda49779bcb3fdb208d87fe"
+    "token": "c44eee142e0f4760a4ba58a6fad3e472"
   }, 
   "data": {
     "procurementMethod": "open", 
-    "auctionID": "UA-EA-2016-12-02-000001", 
+    "auctionID": "UA-PS-2017-05-25-000001", 
     "enquiryPeriod": {
-      "startDate": "2016-12-02T19:52:46.046226+02:00", 
-      "endDate": "2016-12-15T23:59:50+02:00"
+      "startDate": "2017-05-25T17:27:56.669745+03:00", 
+      "endDate": "2017-06-07T23:59:50+03:00"
     }, 
     "submissionMethod": "electronicAuction", 
     "dgfDecisionDate": "2016-11-17", 
-    "next_check": "2016-12-15T23:59:50+02:00", 
+    "next_check": "2017-06-07T23:59:50+03:00", 
     "awardCriteria": "highestCost", 
     "dgfDecisionID": "219560", 
     "owner": "broker", 
-    "id": "bfddd8a61d1d49d19156b1e40ccb6e82", 
+    "id": "b4642b238000446da633ee7ddceaf888", 
     "eligibilityCriteria_ru": "К участию допускаются только лицензированные финансовые учреждения.", 
     "documents": [
       {
         "title": "Місце та форма прийому заяв на участь в аукціоні та банківські реквізити для зарахування гарантійних внесків", 
         "url": "http://torgi.fg.gov.ua/prozorrosale", 
         "documentOf": "tender", 
-        "datePublished": "2016-12-02T19:52:46.046551+02:00", 
+        "datePublished": "2017-05-25T17:27:56.670192+03:00", 
         "documentType": "x_dgfPlatformLegalDetails", 
-        "dateModified": "2016-12-02T19:52:46.046577+02:00", 
-        "id": "552b341aaa62463ea1352e187191ef67"
+        "dateModified": "2017-05-25T17:27:56.670252+03:00", 
+        "id": "0718db9fe65446a3ac7fffb3551b1e3f"
       }
     ], 
     "title": "футляри до державних нагород", 
     "tenderAttempts": 1, 
     "eligibilityCriteria_en": "Only licensed financial institutions are eligible to participate.", 
     "procurementMethodDetails": "quick, accelerator=1440", 
-    "dateModified": "2016-12-02T19:52:46.049898+02:00", 
+    "dateModified": "2017-05-25T17:27:56.680655+03:00", 
     "status": "active.tendering", 
     "eligibilityCriteria": "До участі допускаються лише ліцензовані фінансові установи.", 
     "tenderPeriod": {
-      "startDate": "2016-12-02T19:52:46.046226+02:00", 
-      "endDate": "2016-12-15T23:59:50+02:00"
+      "startDate": "2017-05-25T17:27:56.669745+03:00", 
+      "endDate": "2017-06-07T23:59:50+03:00"
     }, 
     "auctionPeriod": {
-      "shouldStartAfter": "2016-12-16T00:00:00+02:00"
+      "shouldStartAfter": "2017-06-08T00:00:00+03:00"
     }, 
     "procurementMethodType": "dgfFinancialAssets", 
     "dgfID": "219560", 
-    "date": "2016-12-02T19:52:46.046226+02:00", 
+    "date": "2017-05-25T17:27:56.669745+03:00", 
     "minimalStep": {
       "currency": "UAH", 
       "amount": 35.0, 
@@ -129,9 +129,9 @@ Location: http://api-sandbox.ea.openprocurement.org/api/2.3/auctions/bfddd8a61d1
       {
         "description": "Земля для військовослужбовців", 
         "classification": {
-          "scheme": "CAV", 
+          "scheme": "CPV", 
           "description": "Земельні ділянки", 
-          "id": "06000000-2"
+          "id": "66113000-5"
         }, 
         "address": {
           "postalCode": "79000", 
@@ -140,7 +140,7 @@ Location: http://api-sandbox.ea.openprocurement.org/api/2.3/auctions/bfddd8a61d1
           "region": "м. Київ", 
           "locality": "м. Київ"
         }, 
-        "id": "04bde5f15581477d9b2ae73dfe77dc1b", 
+        "id": "1a4aae4041e5478f8c89a255a8763e34", 
         "unit": {
           "code": "44617100-9", 
           "name": "item"

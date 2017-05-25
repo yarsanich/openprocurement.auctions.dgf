@@ -12,7 +12,7 @@ Host: api-sandbox.ea.openprocurement.org
       "amount": 35
     }, 
     "auctionPeriod": {
-      "startDate": "2016-12-02T19:57:38.777946"
+      "startDate": "2017-05-25T17:32:45.012376"
     }, 
     "tenderAttempts": 1, 
     "procurementMethodType": "dgfOtherAssets", 
@@ -47,8 +47,8 @@ Host: api-sandbox.ea.openprocurement.org
     "items": [
       {
         "classification": {
-          "scheme": "CAV", 
-          "id": "06000000-2", 
+          "scheme": "CPV", 
+          "id": "66113000-5", 
           "description": "Земельні ділянки"
         }, 
         "quantity": 5, 
@@ -73,61 +73,61 @@ Host: api-sandbox.ea.openprocurement.org
 
 201 Created
 Content-Type: application/json; charset=UTF-8
-Location: http://api-sandbox.ea.openprocurement.org/api/2.3/auctions/bfcc751cef024aaf9bac178262453d6c
+Location: http://api-sandbox.ea.openprocurement.org/api/2.3/auctions/d547e32bff2148b0b8a3062c9fd82861
 
 {
   "access": {
-    "token": "5fb99381466a426692066cf472bbcb73"
+    "token": "937b4795d6ca4973a8d94e1f76f20c87"
   }, 
   "data": {
     "procurementMethod": "open", 
-    "auctionID": "UA-EA-2016-12-02-000001", 
+    "auctionID": "UA-PS-2017-05-25-000001", 
     "enquiryPeriod": {
-      "startDate": "2016-12-02T19:52:41.958064+02:00", 
-      "endDate": "2016-12-02T19:56:38.876016+02:00"
+      "startDate": "2017-05-25T17:27:49.876374+03:00", 
+      "endDate": "2017-05-25T17:31:51.147784+03:00"
     }, 
     "submissionMethod": "electronicAuction", 
     "dgfDecisionDate": "2016-11-17", 
-    "next_check": "2016-12-02T19:56:38.876016+02:00", 
+    "next_check": "2017-05-25T17:31:51.147784+03:00", 
     "awardCriteria": "highestCost", 
     "dgfDecisionID": "219560", 
     "owner": "broker", 
     "title_en": "[TESTING] ", 
-    "id": "bfcc751cef024aaf9bac178262453d6c", 
+    "id": "d547e32bff2148b0b8a3062c9fd82861", 
     "documents": [
       {
         "title": "Місце та форма прийому заяв на участь в аукціоні та банківські реквізити для зарахування гарантійних внесків", 
         "url": "http://torgi.fg.gov.ua/prozorrosale", 
         "documentOf": "tender", 
-        "datePublished": "2016-12-02T19:52:41.958414+02:00", 
+        "datePublished": "2017-05-25T17:27:49.880626+03:00", 
         "documentType": "x_dgfPlatformLegalDetails", 
-        "dateModified": "2016-12-02T19:52:41.958443+02:00", 
-        "id": "14eeb0435c484d64a863c4d2072a3913"
+        "dateModified": "2017-05-25T17:27:49.880697+03:00", 
+        "id": "6bd9480631564971a36cc31733157625"
       }
     ], 
     "title": "[ТЕСТУВАННЯ] футляри до державних нагород", 
     "tenderAttempts": 1, 
     "procurementMethodDetails": "quick, accelerator=1440", 
-    "dateModified": "2016-12-02T19:52:41.962448+02:00", 
+    "dateModified": "2017-05-25T17:27:49.885311+03:00", 
     "status": "active.tendering", 
     "tenderPeriod": {
-      "startDate": "2016-12-02T19:52:41.958064+02:00", 
-      "endDate": "2016-12-02T19:56:38.876016+02:00"
+      "startDate": "2017-05-25T17:27:49.876374+03:00", 
+      "endDate": "2017-05-25T17:31:51.147784+03:00"
     }, 
     "auctionPeriod": {
-      "shouldStartAfter": "2016-12-02T19:56:38.876016+02:00"
+      "shouldStartAfter": "2017-05-25T17:31:51.147784+03:00"
     }, 
     "procurementMethodType": "dgfOtherAssets", 
     "dgfID": "219560", 
-    "date": "2016-12-02T19:52:41.958064+02:00", 
+    "date": "2017-05-25T17:27:49.876374+03:00", 
     "submissionMethodDetails": "quick", 
     "items": [
       {
         "description": "Земля для військовослужбовців", 
         "classification": {
-          "scheme": "CAV", 
+          "scheme": "CPV", 
           "description": "Земельні ділянки", 
-          "id": "06000000-2"
+          "id": "66113000-5"
         }, 
         "address": {
           "postalCode": "79000", 
@@ -136,7 +136,7 @@ Location: http://api-sandbox.ea.openprocurement.org/api/2.3/auctions/bfcc751cef0
           "region": "м. Київ", 
           "locality": "м. Київ"
         }, 
-        "id": "1296f6575026425bb85e4d36b236b3e5", 
+        "id": "35e1a262bee442e9bc9c457675d19e50", 
         "unit": {
           "code": "44617100-9", 
           "name": "item"

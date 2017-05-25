@@ -221,6 +221,7 @@ msgstr ""
 msgid "ID of related :ref:`item`."
 msgstr "Ідентифікатор пов'язаних об'єктів :ref:`item`."
 
+<<<<<<< HEAD
 msgid "`x_dgfPublicAssetCertificate` - **Public Asset Certificate**"
 msgstr "`x_dgfPublicAssetCertificate` - **Публічний Паспорт Активу**"
 
@@ -287,6 +288,22 @@ msgstr ""
 #~ "Порядок ознайомлення з майном / Порядок ознайомлення з активом у кімнаті "
 #~ "даних. Містить інформацію про те де і коли певний документ можна переглянути"
 #~ " вживу."
+
+msgid "`x_presentation` - **Presentation**"
+msgstr "`x_presentation` - **Презентація**"
+
+msgid "Presentation about an asset that is being sold."
+msgstr "Презентація активу виставленого на продаж."
+
+msgid "`x_nda` - **Non-disclosure Agreement (NDA)**"
+msgstr "`x_nda` - **Договір про нерозголошення (NDA)**"
+
+msgid ""
+"A non-disclosure agreement between a participant and a bank/Deposit "
+"Guarantee Fund."
+msgstr ""
+"Договір про нерозголошення між учасником та банком/Фондом Гарантування"
+" Вкладів."
 
 #~ msgid "`biddingDocuments` - **Bidding Documents**"
 #~ msgstr "`biddingDocuments` - **Документи закупівлі**"

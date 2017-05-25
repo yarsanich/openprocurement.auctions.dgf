@@ -1,4 +1,4 @@
-PATCH /api/2.3/auctions/435c47dfcd164eb9806932cc6aec4056/contracts/f157399b916944cda8606df3c894d141?acc_token=977614b74e04409bbb1213e370cef636 HTTP/1.0
+PATCH /api/2.3/auctions/b0cb82074afe46c4a99deba3a188d456/contracts/c711443e16b14269bcb6a28ba525d471?acc_token=b8246a8ec6124df0a4a96ef8d975262d HTTP/1.0
 Authorization: Basic YnJva2VyOg==
 Content-Length: 80
 Content-Type: application/json
@@ -7,7 +7,7 @@ Host: api-sandbox.ea.openprocurement.org
 {
   "data": {
     "status": "active", 
-    "dateSigned": "2016-12-02T19:52:51.187925+02:00"
+    "dateSigned": "2017-05-25T17:28:05.187777+03:00"
   }
 }
 
@@ -22,31 +22,31 @@ Content-Type: application/json; charset=UTF-8
       {
         "hash": "md5:00000000000000000000000000000000", 
         "format": "application/msword", 
-        "url": "http://public.docs-sandbox.ea.openprocurement.org/get/ce3caff813144fe986e0774f36398fd4?KeyID=85c206d4&Signature=AWPJcgtjKm%2Fj9rPaiMCeKqRUtp%2FkMX1dyqzCQBdy1kHRdpTghL4qfrcSHFMnrKEw1K0usng3sKBR4F7Rg4bOCw%253D%253D", 
+        "url": "http://public.docs-sandbox.ea.openprocurement.org/get/d76c16815b504ab9b0b1fda1ba3d99ba?KeyID=561eda93&Signature=KL2YXgj6%2FYQpISacrmg1HkHil6Z%252Bqn%252BuooH4Hca3O9QPSxYm1utZH8VLx46pqzx%252BOMAUsEPll3HYVh1fN0WtBQ%253D%253D", 
         "title": "contract_first_document.doc", 
         "documentOf": "tender", 
-        "datePublished": "2016-12-02T19:52:50.875944+02:00", 
-        "dateModified": "2016-12-02T19:52:50.875972+02:00", 
-        "id": "ca3de7f7576344688c85ca0d76aa5b9b"
+        "datePublished": "2017-05-25T17:28:04.579796+03:00", 
+        "dateModified": "2017-05-25T17:28:04.579838+03:00", 
+        "id": "13521a7c2d93476f96c0ec8e3b8b3feb"
       }, 
       {
         "hash": "md5:00000000000000000000000000000000", 
         "format": "application/msword", 
-        "url": "http://public.docs-sandbox.ea.openprocurement.org/get/ee261e8201034f2dae4424a0e5b723cf?KeyID=85c206d4&Signature=LXmJeO8yIJhoPsGtGiOZqFfIyTg3mRB94e%252BYompaeeLZx2qxQiTiOpVySouP6toPmo0sgxXxYvhvZVrrRbOGBw%253D%253D", 
+        "url": "http://public.docs-sandbox.ea.openprocurement.org/get/289f8a278eb644cb9f7d298afaae9b5c?KeyID=561eda93&Signature=2tXeY1giwOBC8mvhDecnmMgSwm5SwuJs06ahLwgZy41ztfH5NRjEqW1IswY8K1HmxvaKvBQi%252BP167x3%252BypAaCg%253D%253D", 
         "title": "contract_second_document.doc", 
         "documentOf": "tender", 
-        "datePublished": "2016-12-02T19:52:51.051172+02:00", 
-        "dateModified": "2016-12-02T19:52:51.051198+02:00", 
-        "id": "c92293f4ab784664a674b680bc9e932d"
+        "datePublished": "2017-05-25T17:28:04.934471+03:00", 
+        "dateModified": "2017-05-25T17:28:04.934526+03:00", 
+        "id": "ef780353c8004470add72739cb50fb3f"
       }
     ], 
     "items": [
       {
         "description": "Земля для військовослужбовців", 
         "classification": {
-          "scheme": "CAV", 
+          "scheme": "CPV", 
           "description": "Земельні ділянки", 
-          "id": "06000000-2"
+          "id": "66113000-5"
         }, 
         "address": {
           "postalCode": "79000", 
@@ -55,7 +55,7 @@ Content-Type: application/json; charset=UTF-8
           "region": "м. Київ", 
           "locality": "м. Київ"
         }, 
-        "id": "138ee59778a14c16a841db9509ba2ca0", 
+        "id": "08391d0984d74b1787545029fff9485f", 
         "unit": {
           "code": "44617100-9", 
           "name": "item"
@@ -86,19 +86,19 @@ Content-Type: application/json; charset=UTF-8
       }
     ], 
     "period": {
-      "startDate": "2016-12-02T19:52:38.777946+02:00", 
-      "endDate": "2017-12-02T19:52:38.777946+02:00"
+      "startDate": "2017-05-25T17:27:45.012376+03:00", 
+      "endDate": "2018-05-25T17:27:45.012376+03:00"
     }, 
     "value": {
       "currency": "UAH", 
       "amount": 501.0, 
       "valueAddedTaxIncluded": true
     }, 
-    "dateSigned": "2016-12-02T19:52:51.187925+02:00", 
-    "date": "2016-12-02T19:52:51.277919+02:00", 
-    "awardID": "7ffa56fffcde424cbbfe6bb71365d0bc", 
-    "id": "f157399b916944cda8606df3c894d141", 
-    "contractID": "UA-EA-2016-12-02-000001-1"
+    "dateSigned": "2017-05-25T17:28:05.187777+03:00", 
+    "date": "2017-05-25T17:28:05.425351+03:00", 
+    "awardID": "96144c4198a54cac8649c4979444cd6b", 
+    "id": "c711443e16b14269bcb6a28ba525d471", 
+    "contractID": "UA-PS-2017-05-25-000001-1"
   }
 }
 

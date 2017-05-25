@@ -23,7 +23,7 @@ from openprocurement.auctions.flash.models import (
     calc_auction_end_time, COMPLAINT_STAND_STILL_TIME,
     Organization as BaseOrganization, Item as BaseItem,
     ProcuringEntity as BaseProcuringEntity, Question as BaseQuestion,
-    get_auction,
+    get_auction, Administrator_role
 )
 
 
@@ -245,6 +245,7 @@ class Auction(BaseAuction):
         roles = {
             'create': create_role,
             'edit_active.tendering': (blacklist('enquiryPeriod', 'tenderPeriod', 'value', 'auction_value', 'minimalStep', 'auction_minimalStep', 'guarantee', 'auction_guarantee', 'eligibilityCriteria', 'eligibilityCriteria_en', 'eligibilityCriteria_ru', 'title', 'title_ru', 'title_en', 'dgfID', 'dgfDecisionDate', 'dgfDecisionID', 'description', 'description_ru', 'description_en', 'awardCriteriaDetails', 'awardCriteriaDetails_en', 'awardCriteriaDetails_ru', 'procurementMethodRationale', 'procurementMethodRationale_en', 'procurementMethodRationale_ru', 'submissionMethodDetails', 'submissionMethodDetails_en', 'submissionMethodDetails_ru', 'items', 'procuringEntity', 'tenderAttempts') + edit_role),
+            'Administrator': (whitelist('value', 'minimalStep', 'guarantee') + Administrator_role),
         }
 
     awards = ListType(ModelType(Award), default=list())

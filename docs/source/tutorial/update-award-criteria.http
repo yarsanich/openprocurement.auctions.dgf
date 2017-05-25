@@ -1,12 +1,12 @@
-PUT /api/2.3/auctions/435c47dfcd164eb9806932cc6aec4056/documents/89f5f87cc3cb485298bba05aa7d80c95?acc_token=977614b74e04409bbb1213e370cef636 HTTP/1.0
+PUT /api/2.3/auctions/b0cb82074afe46c4a99deba3a188d456/documents/8de16b471d1a481d8c26ef6876e3da0b?acc_token=b8246a8ec6124df0a4a96ef8d975262d HTTP/1.0
 Authorization: Basic YnJva2VyOg==
-Content-Length: 342
+Content-Length: 346
 Content-Type: application/json
 Host: api-sandbox.ea.openprocurement.org
 
 {
   "data": {
-    "url": "http://public.docs-sandbox.ea.openprocurement.org/get/e29ad8f5ce8c4c2f818cdb9ee69263d2?KeyID=85c206d4&Signature=mGZGLjWsNpkbbtnmHoultjlZzSMe%2B1sRJkHwigXglUCYN9pbuIvVDs%2BzdYmFIv15Wjgd3Yd%2FnGzB%2Fj4AlxsODg%3D%3D", 
+    "url": "http://public.docs-sandbox.ea.openprocurement.org/get/b65535c4bc074b72a60f62acb82472f4?KeyID=561eda93&Signature=NuviaFqtubop5%2FiWC2v3EIkDct84gWGrCgEt9jnhZjLdEbWMe5jS9Bu2kthHceV8%2FJA6SQ%2B%2FH2ouTA%2Br%2FJkRCA%3D%3D", 
     "title": "AwardCriteria-2.pdf", 
     "hash": "md5:00000000000000000000000000000000", 
     "format": "application/pdf"
@@ -21,12 +21,12 @@ Content-Type: application/json; charset=UTF-8
   "data": {
     "hash": "md5:00000000000000000000000000000000", 
     "format": "application/pdf", 
-    "url": "http://public.docs-sandbox.ea.openprocurement.org/get/e29ad8f5ce8c4c2f818cdb9ee69263d2?KeyID=85c206d4&Signature=UuJq6sfk4D%252BSPmJGyJPg7EobdikHhpoF2TmWKag0BynR9ZnvkMJwNTRl2B363rsiAzPK5IDcn5pswqB1BI8cCg%253D%253D", 
+    "url": "http://public.docs-sandbox.ea.openprocurement.org/get/b65535c4bc074b72a60f62acb82472f4?KeyID=561eda93&Signature=QjWyizp6j1aJUgyNi0lqSP9LBTCixti9L1VNVP7mqK7TLtRxNl8ufSwa7Zygg%2Fj%252Bu99v7GHR6rykbXWCkYv7AQ%253D%253D", 
     "title": "AwardCriteria-2.pdf", 
     "documentOf": "tender", 
-    "datePublished": "2016-12-02T19:52:48.274998+02:00", 
-    "dateModified": "2016-12-02T19:52:48.333345+02:00", 
-    "id": "89f5f87cc3cb485298bba05aa7d80c95"
+    "datePublished": "2017-05-25T17:28:00.316280+03:00", 
+    "dateModified": "2017-05-25T17:28:00.447454+03:00", 
+    "id": "8de16b471d1a481d8c26ef6876e3da0b"
   }
 }
 
