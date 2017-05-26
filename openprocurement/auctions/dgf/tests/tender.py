@@ -1233,7 +1233,6 @@ class AuctionResourceTest(BaseWebTest):
         response = self.app.patch_json('/auctions/{}'.format(auction['id']),{'data': {'value': {'amount': auction['value']['amount'] - 80}}}, status=422)
         self.assertEqual(response.json['errors'], [{'location': 'body', 'name': 'minimalStep', 'description': [u'value should be less than value of auction']}])
 
-
 class AuctionProcessTest(BaseAuctionWebTest):
     #setUp = BaseWebTest.setUp
     def setUp(self):
