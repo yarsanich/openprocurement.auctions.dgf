@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta, time
-from schematics.types import StringType, URLType, IntType
+from schematics.types import StringType, URLType, IntType, BaseType
 from schematics.types.compound import ModelType
 from schematics.exceptions import ValidationError
 from schematics.transforms import blacklist, whitelist
@@ -11,8 +11,8 @@ from zope.interface import implementer
 from openprocurement.api.models import (
     BooleanType, ListType, Feature, Period, get_now, TZ, ComplaintModelType,
     validate_features_uniq, validate_lots_uniq, Identifier as BaseIdentifier,
-    Classification, validate_items_uniq, ORA_CODES, Address, Location,
-    schematics_embedded_role, SANDBOX_MODE
+    Classification, validate_items_uniq, validate_cpv_group, ORA_CODES, Address, Location,
+    schematics_embedded_role, SANDBOX_MODE, CPV_CODES
 )
 from openprocurement.api.utils import calculate_business_date
 from openprocurement.auctions.core.models import IAuction
@@ -40,7 +40,20 @@ def read_json(name):
 ORA_CODES = ORA_CODES[:]
 ORA_CODES[0:0] = ["UA-IPN", "UA-FIN"]
 
+CAV_CODES = read_json('cav.json')
+
 DGF_ID_REQUIRED_FROM = datetime(2017, 1, 1, tzinfo=TZ)
+
+
+class CPVCAVClassification(Classification):
+    scheme = StringType(required=True, default=u'CPV', choices=[u'CPV', u'CAV'])
+    id = StringType(required=True)
+
+    def validate_id(self, data, code):
+        if data.get('scheme') == u'CPV' and code not in CPV_CODES:
+            raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CPV_CODES)))
+        elif data.get('scheme') == u'CAV' and code not in CAV_CODES:
+            raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CAV_CODES)))
 
 
 class Item(BaseItem):
@@ -50,6 +63,7 @@ class Item(BaseItem):
             'create': blacklist('deliveryLocation', 'deliveryAddress', 'deliveryDate'),
             'edit_active.tendering': blacklist('deliveryLocation', 'deliveryAddress', 'deliveryDate'),
         }
+    classification = ModelType(CPVCAVClassification, required=True)
     additionalClassifications = ListType(ModelType(Classification), default=list())
     address = ModelType(Address)
     location = ModelType(Location)
@@ -215,6 +229,11 @@ class AuctionAuctionPeriod(Period):
         auction = get_auction(data['__parent__'])
         if not auction.revisions and not startDate:
             raise ValidationError(u'This field is required.')
+
+
+def validate_cav_group(items, *args):
+    if items and len(set([i.classification.id[:3] for i in items])) != 1:
+        raise ValidationError(u"CAV group of items be identical")
 
 
 create_role = (blacklist('owner_token', 'owner', '_attachments', 'revisions', 'date', 'dateModified', 'doc_id', 'auctionID', 'bids', 'documents', 'awards', 'questions', 'complaints', 'auctionUrl', 'status', 'enquiryPeriod', 'tenderPeriod', 'awardPeriod', 'procurementMethod', 'eligibilityCriteria', 'eligibilityCriteria_en', 'eligibilityCriteria_ru', 'awardCriteria', 'submissionMethod', 'cancellations', 'numberOfBidders', 'contracts') + schematics_embedded_role)
