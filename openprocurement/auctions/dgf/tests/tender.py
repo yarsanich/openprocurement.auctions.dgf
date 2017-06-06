@@ -570,23 +570,7 @@ class AuctionResourceTest(BaseWebTest):
             {u'description': {u'contactPoint': {u'email': [u'telephone or email should be present']}}, u'location': u'body', u'name': u'procuringEntity'}
         ])
 
-        # CAV classification fail test
-        auction_data['items'][0]['classification'] = {
-            "scheme" : u"CAV",
-            "id": u"07227000-3", # last number is wrong
-            "description": u"Застава - Інше"
-        }
-        response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
-        self.assertTrue(response.json['errors'][0]['description'][0]['classification'])
 
-        # Bad classification
-        auction_data['items'][0]['classification'] = {
-            "scheme" : u"CAE",
-            "id": u"07227000-6", # last number is wrong
-            "description": u"Застава - Інше"
-        }
-        response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
-        self.assertEqual(response.json['errors'], [{u'description': [{u'classification': {u'scheme': [u"Value must be one of [u'CPV', u'CAV']."]}}], u'location': u'body', u'name': u'items'}])
 
     @unittest.skipIf(get_now() < DGF_ID_REQUIRED_FROM, "Can`t create auction without dgfID only from {}".format(DGF_ID_REQUIRED_FROM))
     def test_required_dgf_id(self):
@@ -734,7 +718,33 @@ class AuctionResourceTest(BaseWebTest):
         self.assertEqual(data['guarantee']['currency'], "USD")
 
 
-        # CAV classification test
+    def test_get_auction(self):
+        response = self.app.get('/auctions')
+        self.assertEqual(response.status, '200 OK')
+        self.assertEqual(len(response.json['data']), 0)
+
+        response = self.app.post_json('/auctions', {'data': self.initial_data})
+        self.assertEqual(response.status, '201 Created')
+        auction = response.json['data']
+
+        response = self.app.get('/auctions/{}'.format(auction['id']))
+        self.assertEqual(response.status, '200 OK')
+        self.assertEqual(response.content_type, 'application/json')
+        self.assertEqual(response.json['data'], auction)
+
+        response = self.app.get('/auctions/{}?opt_jsonp=callback'.format(auction['id']))
+        self.assertEqual(response.status, '200 OK')
+        self.assertEqual(response.content_type, 'application/javascript')
+        self.assertIn('callback({"data": {"', response.body)
+
+        response = self.app.get('/auctions/{}?opt_pretty=1'.format(auction['id']))
+        self.assertEqual(response.status, '200 OK')
+        self.assertEqual(response.content_type, 'application/json')
+        self.assertIn('{\n    "data": {\n        "', response.body)
+
+    def test_additionalClassifications(self):
+        auction_data = deepcopy(self.initial_data)
+         # CAV classification test
         auction_data['items'][0]['classification'] = {
             "scheme" : u"CAV",
             "id": u"07227000-6",
@@ -765,30 +775,45 @@ class AuctionResourceTest(BaseWebTest):
         self.assertEqual(data['items'][0]['classification']['scheme'], 'CPV')
         self.assertEqual(data['items'][0]['classification']['id'], '66113000-5')
 
+        # Additional Classification
 
-    def test_get_auction(self):
-        response = self.app.get('/auctions')
-        self.assertEqual(response.status, '200 OK')
-        self.assertEqual(len(response.json['data']), 0)
+        auction_data['items'][0]['additionalClassifications'] = [{
+            "scheme" : u"CPVs",
+            "id": u"PA01-7",
+            "description": u"Найм"
+        }]
+        response = self.app.post_json('/auctions', {'data': auction_data}, status=201)
+        data = response.json['data']
+        self.assertEqual(data['items'][0]['additionalClassifications'][0]['scheme'], 'CPVs')
+        self.assertEqual(data['items'][0]['additionalClassifications'][0]['id'], 'PA01-7')
 
-        response = self.app.post_json('/auctions', {'data': self.initial_data})
-        self.assertEqual(response.status, '201 Created')
-        auction = response.json['data']
+        # CAV classification fail test
+        auction_data['items'][0]['classification'] = {
+            "scheme" : u"CAV",
+            "id": u"07227000-3", # last number is wrong
+            "description": u"Застава - Інше"
+        }
+        response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
+        self.assertTrue(response.json['errors'][0]['description'][0]['classification'])
 
-        response = self.app.get('/auctions/{}'.format(auction['id']))
-        self.assertEqual(response.status, '200 OK')
-        self.assertEqual(response.content_type, 'application/json')
-        self.assertEqual(response.json['data'], auction)
+        # Bad classification
+        auction_data['items'][0]['classification'] = {
+            "scheme" : u"CAE",
+            "id": u"07227000-6", # last number is wrong
+            "description": u"Застава - Інше"
+        }
+        response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
+        self.assertEqual(response.json['errors'], [{u'description': [{u'classification': {u'scheme': [u"Value must be one of [u'CPV', u'CAV']."]}}], u'location': u'body', u'name': u'items'}])
 
-        response = self.app.get('/auctions/{}?opt_jsonp=callback'.format(auction['id']))
-        self.assertEqual(response.status, '200 OK')
-        self.assertEqual(response.content_type, 'application/javascript')
-        self.assertIn('callback({"data": {"', response.body)
+        # Additional Classification wrong id
+        auction_data['items'][0]['additionalClassifications'] = [{
+            "scheme" : u"CPVs",
+            "id": u"PA01-2", # Wrong ID
+            "description": u"Найм"
+        }]
+        response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
+        self.assertTrue(response.json['errors'][0]['description'][0]['additionalClassifications'])
 
-        response = self.app.get('/auctions/{}?opt_pretty=1'.format(auction['id']))
-        self.assertEqual(response.status, '200 OK')
-        self.assertEqual(response.content_type, 'application/json')
-        self.assertIn('{\n    "data": {\n        "', response.body)
 
     @unittest.skip("option not available")
     def test_auction_features_invalid(self):

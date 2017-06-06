@@ -41,6 +41,7 @@ ORA_CODES = ORA_CODES[:]
 ORA_CODES[0:0] = ["UA-IPN", "UA-FIN"]
 
 CAV_CODES = read_json('cav.json')
+CPVS_CODES = read_json('cpvs.json')
 
 DGF_ID_REQUIRED_FROM = datetime(2017, 1, 1, tzinfo=TZ)
 
@@ -56,6 +57,12 @@ class CPVCAVClassification(Classification):
             raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CAV_CODES)))
 
 
+class AdditionalClassification(Classification):
+    def validate_id(self, data, code):
+        if data.get('scheme') == u'CPVs' and code not in CPVS_CODES:
+            raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CPVS_CODES)))
+
+
 class Item(BaseItem):
     """A good, service, or work to be contracted."""
     class Options:
@@ -64,7 +71,7 @@ class Item(BaseItem):
             'edit_active.tendering': blacklist('deliveryLocation', 'deliveryAddress', 'deliveryDate'),
         }
     classification = ModelType(CPVCAVClassification, required=True)
-    additionalClassifications = ListType(ModelType(Classification), default=list())
+    additionalClassifications = ListType(ModelType(AdditionalClassification), default=list())
     address = ModelType(Address)
     location = ModelType(Location)
 
