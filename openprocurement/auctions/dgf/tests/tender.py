@@ -1109,6 +1109,13 @@ class AuctionResourceTest(BaseWebTest):
         self.assertEqual(response.status, '200 OK')
         self.assertEqual(response.content_type, 'application/json')
 
+        response = self.app.patch_json('/auctions/{}'.format(auction['id']), {'data': {'items': [{"classification": {
+            "scheme": u"CPV",
+            "id": u"03100000-2",
+            "description": u"Нерухоме майно"
+        }}]}}, status=422)
+        self.assertEqual(response.json['errors'], [{u'description': [{u'classification': {u'id': [u'At least CPV classification class should be specified more precisely']}}], u'location': u'body', u'name': u'items'}])
+
         response = self.app.patch_json('/auctions/{}'.format(auction['id']), {'data': {'items': [{"additionalClassifications": [auction['items'][0]["classification"]]}]}})
         self.assertEqual(response.status, '200 OK')
         self.assertEqual(response.content_type, 'application/json')
