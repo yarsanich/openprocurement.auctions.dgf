@@ -11,7 +11,7 @@ from zope.interface import implementer
 from openprocurement.api.models import (
     BooleanType, ListType, Feature, Period, get_now, TZ, ComplaintModelType,
     validate_features_uniq, validate_lots_uniq, Identifier as BaseIdentifier,
-    Classification, validate_items_uniq, validate_cpv_group, ORA_CODES, Address, Location,
+    Classification, validate_items_uniq, ORA_CODES, Address, Location,
     schematics_embedded_role, SANDBOX_MODE, CPV_CODES
 )
 from openprocurement.api.utils import calculate_business_date
@@ -55,13 +55,13 @@ class CPVCAVClassification(Classification):
             raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CPV_CODES)))
         elif data.get('scheme') == u'CAV' and code not in CAV_CODES:
             raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CAV_CODES)))
-        if code[3:-2].count('0') > 4:
-            raise ValidationError('At least CPV classification class should be specified more precisely')
+        if code.find("00000-") > 0:
+            raise ValidationError('At least CPV/CAV classification class should be specified more precisely')
 
 
 class AdditionalClassification(Classification):
     def validate_id(self, data, code):
-        if data.get('scheme') == u'CPVs' and code not in CPVS_CODES:
+        if data.get('scheme') == u'CPVS' and code not in CPVS_CODES:
             raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CPVS_CODES)))
 
 
@@ -238,11 +238,6 @@ class AuctionAuctionPeriod(Period):
         auction = get_auction(data['__parent__'])
         if not auction.revisions and not startDate:
             raise ValidationError(u'This field is required.')
-
-
-def validate_cav_group(items, *args):
-    if items and len(set([i.classification.id[:3] for i in items])) != 1:
-        raise ValidationError(u"CAV group of items be identical")
 
 
 create_role = (blacklist('owner_token', 'owner', '_attachments', 'revisions', 'date', 'dateModified', 'doc_id', 'auctionID', 'bids', 'documents', 'awards', 'questions', 'complaints', 'auctionUrl', 'status', 'enquiryPeriod', 'tenderPeriod', 'awardPeriod', 'procurementMethod', 'eligibilityCriteria', 'eligibilityCriteria_en', 'eligibilityCriteria_ru', 'awardCriteria', 'submissionMethod', 'cancellations', 'numberOfBidders', 'contracts') + schematics_embedded_role)

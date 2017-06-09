@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 import unittest
 from copy import deepcopy
 from datetime import timedelta, time
@@ -778,13 +779,13 @@ class AuctionResourceTest(BaseWebTest):
         # Additional Classification
 
         auction_data['items'][0]['additionalClassifications'] = [{
-            "scheme" : u"CPVs",
+            "scheme" : u"CPVS",
             "id": u"PA01-7",
             "description": u"Найм"
         }]
         response = self.app.post_json('/auctions', {'data': auction_data}, status=201)
         data = response.json['data']
-        self.assertEqual(data['items'][0]['additionalClassifications'][0]['scheme'], 'CPVs')
+        self.assertEqual(data['items'][0]['additionalClassifications'][0]['scheme'], 'CPVS')
         self.assertEqual(data['items'][0]['additionalClassifications'][0]['id'], 'PA01-7')
 
         # CAV classification fail test
@@ -798,8 +799,8 @@ class AuctionResourceTest(BaseWebTest):
 
         # Bad classification
         auction_data['items'][0]['classification'] = {
-            "scheme" : u"CAE",
-            "id": u"07227000-6", # last number is wrong
+            "scheme" : u"CAE", # wrong scheme
+            "id": u"07227000-6", 
             "description": u"Застава - Інше"
         }
         response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
@@ -807,12 +808,13 @@ class AuctionResourceTest(BaseWebTest):
 
         # Additional Classification wrong id
         auction_data['items'][0]['additionalClassifications'] = [{
-            "scheme" : u"CPVs",
+            "scheme" : u"CPVS",
             "id": u"PA01-2", # Wrong ID
             "description": u"Найм"
         }]
         response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
-        self.assertTrue(response.json['errors'][0]['description'][0]['additionalClassifications'])
+        x = re.match("Value must be one of*", response.json['errors'][0]['description'][0]['additionalClassifications'][0]['id'][0])
+        self.assertTrue(x)
 
 
     @unittest.skip("option not available")
@@ -1114,7 +1116,7 @@ class AuctionResourceTest(BaseWebTest):
             "id": u"03100000-2",
             "description": u"Нерухоме майно"
         }}]}}, status=422)
-        self.assertEqual(response.json['errors'], [{u'description': [{u'classification': {u'id': [u'At least CPV classification class should be specified more precisely']}}], u'location': u'body', u'name': u'items'}])
+        self.assertEqual(response.json['errors'], [{u'description': [{u'classification': {u'id': [u'At least CPV/CAV classification class should be specified more precisely']}}], u'location': u'body', u'name': u'items'}])
 
         response = self.app.patch_json('/auctions/{}'.format(auction['id']), {'data': {'items': [{"additionalClassifications": [auction['items'][0]["classification"]]}]}})
         self.assertEqual(response.status, '200 OK')
