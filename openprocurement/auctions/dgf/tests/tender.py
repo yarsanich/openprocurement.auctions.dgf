@@ -813,8 +813,7 @@ class AuctionResourceTest(BaseWebTest):
             "description": u"Найм"
         }]
         response = self.app.post_json('/auctions', {'data': auction_data}, status=422)
-        x = re.match("Value must be one of*", response.json['errors'][0]['description'][0]['additionalClassifications'][0]['id'][0])
-        self.assertTrue(x)
+        self.assertRegexpMatches(response.json['errors'][0]['description'][0]['additionalClassifications'][0]['id'][0], "Value must be one of*")
 
 
     @unittest.skip("option not available")
@@ -1116,7 +1115,7 @@ class AuctionResourceTest(BaseWebTest):
             "id": u"03100000-2",
             "description": u"Нерухоме майно"
         }}]}}, status=422)
-        self.assertEqual(response.json['errors'], [{u'description': [{u'classification': {u'id': [u'At least CPV/CAV classification class should be specified more precisely']}}], u'location': u'body', u'name': u'items'}])
+        self.assertEqual(response.json['errors'], [{u'description': [{u'classification': {u'id': [u'At least CPV classification class (XXXX0000-Y) should be specified more precisely']}}], u'location': u'body', u'name': u'items'}])
 
         response = self.app.patch_json('/auctions/{}'.format(auction['id']), {'data': {'items': [{"additionalClassifications": [auction['items'][0]["classification"]]}]}})
         self.assertEqual(response.status, '200 OK')

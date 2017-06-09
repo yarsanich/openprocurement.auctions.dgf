@@ -56,7 +56,7 @@ class CPVCAVClassification(Classification):
         elif data.get('scheme') == u'CAV' and code not in CAV_CODES:
             raise ValidationError(BaseType.MESSAGES['choices'].format(unicode(CAV_CODES)))
         if code.find("00000-") > 0:
-            raise ValidationError('At least CPV/CAV classification class should be specified more precisely')
+            raise ValidationError('At least {} classification class (XXXX0000-Y) should be specified more precisely'.format(data.get('scheme')))
 
 
 class AdditionalClassification(Classification):
